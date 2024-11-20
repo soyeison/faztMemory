@@ -78,8 +78,12 @@ public class Main {
 				break;
 			}
 			case 2: {
-				Player player1 = new Player("Yeison");
-				Player player2 = new Player("Villegas");
+				System.out.println("Ingrese el nombre del primer jugador: ");
+				String name1 = scanner.nextLine();
+				Player player1 = new Player(name1);
+				System.out.println("Ingrese el nombre del segundo jugador: ");
+				String name2 = scanner.nextLine();
+				Player player2 = new Player(name2);
 				FaztMemory faztMemory = new FaztMemory(player1, player2, "easy");
 				Card[] cards = faztMemory.getBoard().getCards();
 				// Juego para dos
