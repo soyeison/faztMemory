@@ -1,7 +1,9 @@
 package co.edu.poli.model;
 
 public class Player {
+	// Nombre deL jugador 
 	private String name;
+	// Puntuación deL jugador
 	private int score;
 	
 	public Player() {
