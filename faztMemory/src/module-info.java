@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * 
- */
-module faztMemory {
-	requires junit;
-}
