@@ -1,6 +1,6 @@
 package co.edu.poli.controller;
 
-import co.edu.poli.view.FaztMemoryIndividualView;
+import co.edu.poli.view.FaztMemoryConfigIndivialGameView;
 import co.edu.poli.view.FaztMemoryTwoPlayersView;
 import co.edu.poli.view.FormInitView;
 import co.edu.poli.view.ViewManager;
@@ -8,17 +8,15 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
 public class FormInitController {
-
 	private FormInitView formInitView;
 	private ViewManager viewManager;
-	// private FaztMemoryView faztMemoryView;
-	private FaztMemoryIndividualView faztMemoryIndividualView;
+	private FaztMemoryConfigIndivialGameView faztMemoryConfigIndividualViewInstance;
 	private FaztMemoryTwoPlayersView faztMemoryTwoPlayersView;
 	
-	public FormInitController(FormInitView initViewInstance, ViewManager viewManagerInstance, FaztMemoryIndividualView faztMemoryIndividualViewInstance, FaztMemoryTwoPlayersView faztMemoryTwoPlayersInstance) {
+	public FormInitController(FormInitView initViewInstance, ViewManager viewManagerInstance, FaztMemoryConfigIndivialGameView faztMemoryConfigIndividualViewInstance, FaztMemoryTwoPlayersView faztMemoryTwoPlayersInstance) {
 		this.formInitView = initViewInstance;
 		this.viewManager = viewManagerInstance;
-		this.setFaztMemoryIndividualView(faztMemoryIndividualViewInstance);
+		this.setFaztMemoryConfigIndividualViewInstance(faztMemoryConfigIndividualViewInstance);
 		this.setFaztMemoryTwoPlayersView(faztMemoryTwoPlayersInstance);
 		
 		configEvents();
@@ -29,7 +27,7 @@ public class FormInitController {
 		formInitView.getInidivualGame().setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				viewManager.changeView(getFaztMemoryIndividualView().getScene());
+				viewManager.changeView(getFaztMemoryConfigIndividualViewInstance().getScene());
 			}
 		});
 		
@@ -49,11 +47,13 @@ public class FormInitController {
 		this.faztMemoryTwoPlayersView = faztMemoryTwoPlayersView;
 	}
 
-	public FaztMemoryIndividualView getFaztMemoryIndividualView() {
-		return faztMemoryIndividualView;
+	public FaztMemoryConfigIndivialGameView getFaztMemoryConfigIndividualViewInstance() {
+		return faztMemoryConfigIndividualViewInstance;
 	}
 
-	public void setFaztMemoryIndividualView(FaztMemoryIndividualView faztMemoryIndividualView) {
-		this.faztMemoryIndividualView = faztMemoryIndividualView;
+	public void setFaztMemoryConfigIndividualViewInstance(FaztMemoryConfigIndivialGameView faztMemoryConfigIndividualViewInstance) {
+		this.faztMemoryConfigIndividualViewInstance = faztMemoryConfigIndividualViewInstance;
 	}
+
+
 }

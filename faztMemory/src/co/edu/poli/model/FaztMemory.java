@@ -181,9 +181,9 @@ public class FaztMemory {
 	 * Metodo envoltura para pintar el tablero
 	 * 
 	 */
-	public String paintBoard() {
-		return board.paintBoard();
-	}
+//	public String paintBoard() {
+//		return board.paintBoard();
+//	}
 	
 	/** 
 	 * Metodo que inicializa el cronometro

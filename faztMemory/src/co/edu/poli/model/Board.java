@@ -1,12 +1,12 @@
 package co.edu.poli.model;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Board {
 	// Arreglos que contienen todas Las cartas del tablero
-	private Card[] cards;
+	private List<Card> cards;
 	// Contador de cartas descubiertas
 	private int uncoveredCards = 0;
 	// Tamaño del tablero ("easy" o "medium")
@@ -27,34 +27,30 @@ public class Board {
 	public void init(String size) {
 		if (size == Board.BOARD_SIZE_EASY) {
 			// Tablero con 16 cartas
-			this.cards = new Card[16];
+			this.cards = new ArrayList<>();
 			this.size = Board.BOARD_SIZE_EASY;
 		} else if (size == Board.BOARD_SIZE_MEDIUM) {
 			// Tablero con 36 cartas
-			this.cards = new Card[36];
+			this.cards = new ArrayList<>();
 			this.size = Board.BOARD_SIZE_MEDIUM;
 		}
 		
-		// Inicializo los frentes y reversos de las cartas
-		for (int i = 0; i < this.cards.length; i++) {
-			if (i > (this.cards.length / 2) - 1) {
-				// Mitad con reverso rojo
-				this.cards[i] = new Card("Blanco", "Rojo");
-			} else {
-				// Mitad con reverso azul
-				this.cards[i] = new Card("Blanco", "Azul");
-			}
-		}
+		int iterator = size == Board.BOARD_SIZE_EASY ? 8 : 16;
 		
-		// Mexcla aleatoriamente Las cartas
-		List<Card> cardsList = Arrays.asList(this.cards);
-		Collections.shuffle(cardsList);
-		this.cards = cardsList.toArray(new Card[0]);
+		for (int i = 0; i < iterator; i++) { // 8 pares de cartas
+            this.cards.add(new Card(i));
+            this.cards.add(new Card(i));
+        }
+		Collections.shuffle(this.cards);
 		
 	}
 	
 	// setters y getters
-	public Card[] getCards() {
+	public int getUncoveredCards() {
+		return this.uncoveredCards;
+	}
+	
+	public List<Card> getCards() {
 		return this.cards;
 	}
 	
@@ -102,8 +98,8 @@ public class Board {
 		// Validar que las dos cartas no se hayan descubierto antes
 		if (firstCard.isEqual(secondCard)) {
 			// Descubrir las dos cartas
-			firstCard.setIsDiscovered();
-			secondCard.setIsDiscovered();
+			firstCard.setIsDiscovered(true);
+			secondCard.setIsDiscovered(true);
 			
 			// Agregar las dos cartas descubiertas al tablero
 			addUncoveredCard();
@@ -116,22 +112,22 @@ public class Board {
 	}
 	
 	/** 
-	 * Pinta el tablero devolciendo un string con el formato adecuado
+	 * Pinta el tablero devolviendo un string con el formato adecuado
 	 * 
 	 */
-	public String paintBoard() {
-		String board = " ";
-		for (int i = 0; i < cards.length; i++) {
-			if(!cards[i].getIsDiscovered()) {
-				board = board + "[" + cards[i].getImagefront() + "]" + " ";
-			} else {
-				board = board + " " + cards[i].getImageBottom() + " ";
-			}
-			if ((i + 1) % 4 == 0) {
-				board = board + "\n" + " ";
-			}
-		}
-		
-		return board;
-	}
+//	public String paintBoard() {
+//		String board = " ";
+//		for (int i = 0; i < cards.length; i++) {
+//			if(!cards[i].getIsDiscovered()) {
+//				board = board + "[" + cards[i].getImagefront() + "]" + " ";
+//			} else {
+//				board = board + " " + cards[i].getImageBottom() + " ";
+//			}
+//			if ((i + 1) % 4 == 0) {
+//				board = board + "\n" + " ";
+//			}
+//		}
+//		
+//		return board;
+//	}
 }

@@ -6,9 +6,9 @@ import junit.framework.TestCase;
 public class CardTest extends TestCase {
 	
 	public void testIsEqual() {
-		Card card1 = new Card("Blanco", "Rojo");
-		Card card2 = new Card("Blanco", "Rojo");
-		Card card3 = new Card("Blanco", "Azul");
+		Card card1 = new Card(1);
+		Card card2 = new Card(1);
+		Card card3 = new Card(2);
 		
 		// Probar que si card 1 y card2 tienen el mismo elemento debajo
 		assertEquals("Las cartas no coinciden", true, card1.isEqual(card2));

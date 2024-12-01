@@ -1,5 +1,7 @@
 package co.edu.poli.test;
 
+import java.util.List;
+
 import co.edu.poli.model.Board;
 import co.edu.poli.model.Card;
 import co.edu.poli.model.FaztMemory;
@@ -17,10 +19,10 @@ public class FaztMemoryTest extends TestCase {
 		assertEquals("Ya hay un ganador", false, faztMemory.thereIsWin());
 		
 		// Testear que ya hay un ganador cuando todas las cartas estan descubiertas
-		Card[] cards = faztMemory.getBoard().getCards();
+		List<Card> cards = faztMemory.getBoard().getCards();
 		Board board = faztMemory.getBoard();
 		for (Card card : cards) {
-			card.setIsDiscovered();
+			card.setIsDiscovered(true);
 			board.addUncoveredCard();
 		}
 		
