@@ -38,7 +38,7 @@ public class IndividualGameController {
 		board = faztMemory.getBoard();
 		cards = faztMemory.getBoard().getCards();
 		
-		this.colorsMap = individualGameView.buildColorsMap(cards);
+		this.colorsMap = individualGameView.buildColorsMap(cards, gameDifficult);
 		this.individualView = individualGameView;
 		this.finalView = finalView;
 		this.viewManager = viewManager;
@@ -49,7 +49,7 @@ public class IndividualGameController {
 		initializeRectangles();
 		
 		// Contruir tablero
-		individualGameView.buildBoard(cards, rectangles);
+		individualGameView.buildBoard(cards, rectangles, gameDifficult);
 		
 		// inicializar listener
 		configClickEvent();

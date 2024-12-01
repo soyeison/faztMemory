@@ -116,12 +116,21 @@ public class TwoPlayersView {
 	}
 	
 	// Metodos
-	public void buildBoard(List<Card> cards, List<Rectangle> rectangles) {
-		int columns = 4;
-		for (int i = 0; i < cards.size(); i++) {
-			int row = i / columns;
-			int column = i % columns;
-			board.add(rectangles.get(i), column, row);
+	public void buildBoard(List<Card> cards, List<Rectangle> rectangles, String gameDifficult) {
+		if (gameDifficult == "easy") {			
+			int columns = 4;
+			for (int i = 0; i < cards.size(); i++) {
+				int row = i / columns;
+				int column = i % columns;
+				board.add(rectangles.get(i), column, row);
+			}
+		} else {
+			int columns = 6;
+			for (int i = 0; i < cards.size(); i++) {
+				int row = i / columns;
+				int column = i % columns;
+				board.add(rectangles.get(i), column, row);
+			}
 		}
 	}
 	
@@ -135,20 +144,27 @@ public class TwoPlayersView {
         return rectangle;
 	}
 	
-	public Map<Integer, Color> buildColorsMap(List<Card> cards) {
-        // Colores predefinidos
-        Color[] availableColors = {
-                Color.BLUE, Color.YELLOW, Color.RED, Color.GREEN,
-                Color.ORANGE, Color.PURPLE, Color.PINK, Color.BROWN
-        };
+	public Map<Integer, Color> buildColorsMap(List<Card> cards, String gameDifficult) {
+		// Colores predefinidos
+				Color[] availableColor;
+				
+				 if (gameDifficult == "easy") {
+					 	availableColor = new Color[8]; // Si la condición es verdadera
+			        } else {
+			        	availableColor = new Color[16]; // Si la condición es falsa
+			        }
+				
+				for (int i = 0; i < availableColor.length; i++) {
+					availableColor[i] = Color.color(Math.random(), Math.random(), Math.random()); // Genera colores aleatorios
+		        }
 
-        Map<Integer, Color> map = new HashMap<>();
-        for (Card card : cards) {
-            if (!map.containsKey(card.getId())) {
-            	map.put(card.getId(), availableColors[map.size() % availableColors.length]);
-            }
-        }
+		        Map<Integer, Color> map = new HashMap<>();
+		        for (Card card : cards) {
+		            if (!map.containsKey(card.getId())) {
+		            	map.put(card.getId(), availableColor[map.size() % availableColor.length]);
+		            }
+		        }
 
-        return map;
+		        return map;
     }
 }

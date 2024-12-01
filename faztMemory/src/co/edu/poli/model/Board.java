@@ -35,7 +35,7 @@ public class Board {
 			this.size = Board.BOARD_SIZE_MEDIUM;
 		}
 		
-		int iterator = size == Board.BOARD_SIZE_EASY ? 8 : 16;
+		int iterator = size == Board.BOARD_SIZE_EASY ? 8 : 18;
 		
 		for (int i = 0; i < iterator; i++) { // 8 pares de cartas
             this.cards.add(new Card(i));

@@ -45,7 +45,7 @@ public class TwoPlayersGameController {
 		currentPlayer = FaztMemory.getFirstPlayer(firstPlayer, secondPlayer);
 		faztMemory.setCurrentPlayer(currentPlayer);
 		
-		this.colorsMap = twoPlayersViewInstance.buildColorsMap(cards);
+		this.colorsMap = twoPlayersViewInstance.buildColorsMap(cards, gameDifficult);
 		this.twoPlayersView = twoPlayersViewInstance;
 		this.finalView = finalView;
 		this.viewManager = viewManager;
@@ -58,7 +58,7 @@ public class TwoPlayersGameController {
 		twoPlayersViewInstance.getFirstName().setText(firstName);
 		twoPlayersViewInstance.getSecondName().setText(secondName);
 		// Contruir tablero
-		twoPlayersViewInstance.buildBoard(cards, rectangles);
+		twoPlayersViewInstance.buildBoard(cards, rectangles, gameDifficult);
 		
 		// inicializar listener
 		configClickEvent();
