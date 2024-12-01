@@ -17,7 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-public class FaztMemoryIndividualView {
+public class IndividualView {
 	private Scene scene;
 	private Label timerLabel;
 	private GridPane board;
@@ -26,7 +26,7 @@ public class FaztMemoryIndividualView {
 	
 	private int seconds = 0; // Variable para llevar el tiempo
 	
-	public FaztMemoryIndividualView() {
+	public IndividualView() {
 		setClicksCounter(new SimpleIntegerProperty(0));
 		
 		timerLabel = new Label();
@@ -80,6 +80,14 @@ public class FaztMemoryIndividualView {
 		return this.timer;
 	}
 	
+	public void setTimerLabel(Label newTimer) {
+		this.timerLabel = newTimer;
+	}
+	
+	public Label getTimerLabel() {
+		return this.timerLabel;
+	}
+	
 	// Metodos
 	public void buildBoard(List<Card> cards, List<Rectangle> rectangles) {
 		int columns = 4;
@@ -100,25 +108,25 @@ public class FaztMemoryIndividualView {
         return rectangle;
 	}
 	
-	public Map<Integer, Color> generarMapaColores(List<Card> cards) {
+	public Map<Integer, Color> buildColorsMap(List<Card> cards) {
         // Colores predefinidos
-        Color[] coloresDisponibles = {
+        Color[] availableColors = {
                 Color.BLUE, Color.YELLOW, Color.RED, Color.GREEN,
                 Color.ORANGE, Color.PURPLE, Color.PINK, Color.BROWN
         };
 
-        Map<Integer, Color> mapa = new HashMap<>();
+        Map<Integer, Color> map = new HashMap<>();
         for (Card card : cards) {
-            if (!mapa.containsKey(card.getId())) {
-                mapa.put(card.getId(), coloresDisponibles[mapa.size() % coloresDisponibles.length]);
+            if (!map.containsKey(card.getId())) {
+            	map.put(card.getId(), availableColors[map.size() % availableColors.length]);
             }
         }
 
-        return mapa;
+        return map;
     }
 	
 	// Formatear el tiempo transcurrido en mm:ss
-    private String formatTime(int totalSeconds) {
+    public String formatTime(int totalSeconds) {
         int minutes = totalSeconds / 60;
         int seconds = totalSeconds % 60;
         return String.format("%02d:%02d", minutes, seconds);

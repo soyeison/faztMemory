@@ -1,25 +1,25 @@
 package co.edu.poli.controller;
 
-import co.edu.poli.view.FaztMemoryConfigIndivialGameView;
-import co.edu.poli.view.FaztMemoryFinalView;
-import co.edu.poli.view.FaztMemoryIndividualView;
+import co.edu.poli.view.ConfigIndivialGameView;
+import co.edu.poli.view.FinalView;
+import co.edu.poli.view.IndividualView;
 import co.edu.poli.view.ViewManager;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 
-public class FaztMemoryConfigIndividualGameController {
-	private FaztMemoryConfigIndivialGameView formConfigIndividualView;
+public class ConfigIndividualGameController {
+	private ConfigIndivialGameView formConfigIndividualView;
 	private ViewManager viewManager;
 	
-	private FaztMemoryIndividualView faztMemoryIndividualGameView;
-	private FaztMemoryFinalView finalView;
+	private IndividualView individualGameView;
+	private FinalView finalView;
 
-	public FaztMemoryConfigIndividualGameController(FaztMemoryConfigIndivialGameView configIndividualGame, ViewManager viewManagerInstance, FaztMemoryIndividualView gameView, FaztMemoryFinalView finalView) {
+	public ConfigIndividualGameController(ConfigIndivialGameView configIndividualGame, ViewManager viewManagerInstance, IndividualView gameView, FinalView finalView) {
 		this.formConfigIndividualView = configIndividualGame;
 		this.finalView = finalView;
 		this.viewManager = viewManagerInstance;
-		this.setFaztMemoryIndividualGameView(gameView);
+		this.setIndividualGameView(gameView);
 		
 		configEvents();
 	}
@@ -36,20 +36,20 @@ public class FaztMemoryConfigIndividualGameController {
 	                showAlert(Alert.AlertType.ERROR, "Formulario incompleto", "Por favor, completa todos los campos.");
 	            } else {
 	            	// Pasarle parametros para que sepa que tamano renderizar
-	            	new FaztMemoryIndividualGameController(nameEntered, optionSelected, getFaztMemoryIndividualGameView(), finalView, viewManager);
+	            	new IndividualGameController(nameEntered, optionSelected, getIndividualView(), finalView, viewManager);
 	            	// Mostrar la vista del juego individual
-	            	getFaztMemoryIndividualGameView().getTimer().play(); // Iniciar el cronómetro
-	            	viewManager.changeView(getFaztMemoryIndividualGameView().getScene());
+	            	getIndividualView().getTimer().play(); // Iniciar el cronómetro
+	            	viewManager.changeView(getIndividualView().getScene());
 	            }
 			}
 		});
 	}
 
-	public FaztMemoryConfigIndivialGameView getFormConfigIndividualView() {
+	public ConfigIndivialGameView getFormConfigIndividualView() {
 		return formConfigIndividualView;
 	}
 
-	public void setFormConfigIndividualView(FaztMemoryConfigIndivialGameView formConfigIndividualView) {
+	public void setFormConfigIndividualView(ConfigIndivialGameView formConfigIndividualView) {
 		this.formConfigIndividualView = formConfigIndividualView;
 	}
 	
@@ -64,11 +64,11 @@ public class FaztMemoryConfigIndividualGameController {
         alerta.showAndWait();
     }
 
-	public FaztMemoryIndividualView getFaztMemoryIndividualGameView() {
-		return faztMemoryIndividualGameView;
+	public IndividualView getIndividualView() {
+		return individualGameView;
 	}
 
-	public void setFaztMemoryIndividualGameView(FaztMemoryIndividualView faztMemoryIndividualGameView) {
-		this.faztMemoryIndividualGameView = faztMemoryIndividualGameView;
+	public void setIndividualGameView(IndividualView IndividualGameView) {
+		this.individualGameView = IndividualGameView;
 	}
 }

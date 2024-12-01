@@ -10,13 +10,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-public class FaztMemoryConfigIndivialGameView {
+public class ConfigIndivialGameView {
 	private Scene scene;
 	private ComboBox<String> gameDifficult;
 	private TextField name;
 	private Button send;
 	
-	public FaztMemoryConfigIndivialGameView() {
+	public ConfigIndivialGameView() {
 		Label title = new Label("Por favor rellene los siguientes campos");
 		title.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
 		

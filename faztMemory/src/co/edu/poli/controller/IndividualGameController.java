@@ -8,8 +8,8 @@ import co.edu.poli.model.Board;
 import co.edu.poli.model.Card;
 import co.edu.poli.model.FaztMemory;
 import co.edu.poli.model.Player;
-import co.edu.poli.view.FaztMemoryFinalView;
-import co.edu.poli.view.FaztMemoryIndividualView;
+import co.edu.poli.view.FinalView;
+import co.edu.poli.view.IndividualView;
 import co.edu.poli.view.ViewManager;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -17,19 +17,20 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class FaztMemoryIndividualGameController {
-	private FaztMemoryIndividualView individualView;
-	private FaztMemoryFinalView finalView;
+public class IndividualGameController {
+	private IndividualView individualView;
+	private FinalView finalView;
 	private ViewManager viewManager;
 	
 	private List<Rectangle> rectangles;
-	private Card firstCardSelected = null;
 	private FaztMemory faztMemory;
 	private Board board;
 	private List<Card> cards;
-	private Map<Integer, Color> mapaColores;
+	private Map<Integer, Color> colorsMap;
 	
-	public FaztMemoryIndividualGameController(String playerName, String gameDifficult, FaztMemoryIndividualView individualGameView, FaztMemoryFinalView finalView, ViewManager viewManager) {
+	private Card firstCardSelected = null;
+	
+	public IndividualGameController(String playerName, String gameDifficult, IndividualView individualGameView, FinalView finalView, ViewManager viewManager) {
 		// Inicializar el jugador en base a l formulario pasado
 		Player player = new Player(playerName);
 		// Inicializar juego
@@ -37,7 +38,7 @@ public class FaztMemoryIndividualGameController {
 		board = faztMemory.getBoard();
 		cards = faztMemory.getBoard().getCards();
 		
-		this.mapaColores = individualGameView.generarMapaColores(cards);
+		this.colorsMap = individualGameView.buildColorsMap(cards);
 		this.individualView = individualGameView;
 		this.finalView = finalView;
 		this.viewManager = viewManager;
@@ -74,7 +75,7 @@ public class FaztMemoryIndividualGameController {
 				}
 				
 				card.setIsDiscovered(true);
-				rectangle.setFill(mapaColores.get(card.getId()));
+				rectangle.setFill(colorsMap.get(card.getId()));
 				
 				
 				if (firstCardSelected == null) {
@@ -83,7 +84,7 @@ public class FaztMemoryIndividualGameController {
 					// Segunda carta descubierta
 					if (board.tryDiscoveredTwoCards(firstCardSelected, card)) {
 						// Son iguales por lo que mantenerles el color
-						rectangle.setFill(mapaColores.get(card.getId()));
+						rectangle.setFill(colorsMap.get(card.getId()));
 					} else {
 						// No son iguales
 						Card lastCard = firstCardSelected;
@@ -113,10 +114,11 @@ public class FaztMemoryIndividualGameController {
 	
 	private void configClickEvent() {
 		individualView.getClicksCounter().addListener((observable, oldValue, newValue) -> {
-			if (faztMemory.getBoard().getUncoveredCards() == 14) {
+			if (faztMemory.getBoard().getUncoveredCards() == 14 || faztMemory.getBoard().getUncoveredCards() == 36) {
 				individualView.getTimer().stop();
 			}
 			if (faztMemory.thereIsWin()) {
+				finalView.getResult().setText("Su tiempo fue: " + individualView.getTimerLabel().getText());
 				viewManager.changeView(finalView.getScene());
 			}
 		});

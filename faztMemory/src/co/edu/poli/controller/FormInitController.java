@@ -1,7 +1,8 @@
 package co.edu.poli.controller;
 
-import co.edu.poli.view.FaztMemoryConfigIndivialGameView;
-import co.edu.poli.view.FaztMemoryTwoPlayersView;
+import co.edu.poli.view.ConfigIndivialGameView;
+import co.edu.poli.view.ConfigTwoPlayersGameView;
+import co.edu.poli.view.TwoPlayersView;
 import co.edu.poli.view.FormInitView;
 import co.edu.poli.view.ViewManager;
 import javafx.event.EventHandler;
@@ -10,14 +11,14 @@ import javafx.scene.input.MouseEvent;
 public class FormInitController {
 	private FormInitView formInitView;
 	private ViewManager viewManager;
-	private FaztMemoryConfigIndivialGameView faztMemoryConfigIndividualViewInstance;
-	private FaztMemoryTwoPlayersView faztMemoryTwoPlayersView;
+	private ConfigIndivialGameView configIndividualViewInstance;
+	private ConfigTwoPlayersGameView configTwoPlayersViewInstance;
 	
-	public FormInitController(FormInitView initViewInstance, ViewManager viewManagerInstance, FaztMemoryConfigIndivialGameView faztMemoryConfigIndividualViewInstance, FaztMemoryTwoPlayersView faztMemoryTwoPlayersInstance) {
+	public FormInitController(FormInitView initViewInstance, ViewManager viewManagerInstance, ConfigIndivialGameView configIndividualViewInstance, ConfigTwoPlayersGameView faztMemoryTwoPlayersInstance) {
 		this.formInitView = initViewInstance;
 		this.viewManager = viewManagerInstance;
-		this.setFaztMemoryConfigIndividualViewInstance(faztMemoryConfigIndividualViewInstance);
-		this.setFaztMemoryTwoPlayersView(faztMemoryTwoPlayersInstance);
+		this.configIndividualViewInstance = configIndividualViewInstance;
+		this.configTwoPlayersViewInstance = faztMemoryTwoPlayersInstance;
 		
 		configEvents();
 	}
@@ -27,33 +28,16 @@ public class FormInitController {
 		formInitView.getInidivualGame().setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				viewManager.changeView(getFaztMemoryConfigIndividualViewInstance().getScene());
+				viewManager.changeView(configIndividualViewInstance.getScene());
 			}
 		});
 		
 		formInitView.getTwoPlayersGame().setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				viewManager.changeView(getFaztMemoryTwoPlayersView().getScene());
+				viewManager.changeView(configTwoPlayersViewInstance.getScene());
 			}
 		});
 	}
-
-	public FaztMemoryTwoPlayersView getFaztMemoryTwoPlayersView() {
-		return faztMemoryTwoPlayersView;
-	}
-
-	public void setFaztMemoryTwoPlayersView(FaztMemoryTwoPlayersView faztMemoryTwoPlayersView) {
-		this.faztMemoryTwoPlayersView = faztMemoryTwoPlayersView;
-	}
-
-	public FaztMemoryConfigIndivialGameView getFaztMemoryConfigIndividualViewInstance() {
-		return faztMemoryConfigIndividualViewInstance;
-	}
-
-	public void setFaztMemoryConfigIndividualViewInstance(FaztMemoryConfigIndivialGameView faztMemoryConfigIndividualViewInstance) {
-		this.faztMemoryConfigIndividualViewInstance = faztMemoryConfigIndividualViewInstance;
-	}
-
 
 }
