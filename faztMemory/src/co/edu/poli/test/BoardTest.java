@@ -14,12 +14,12 @@ public class BoardTest extends TestCase {
 		List<Card> cards = board.getCards();
 		
 		// Bucar cartas que sean iguales
-		List<Card> equalCards = new ArrayList<>();
-		equalCards.set(0, cards.get(0));
+		ArrayList<Card> equalCards = new ArrayList<Card>(2);
+		equalCards.add(cards.get(0));
 		for (int i = 0; i < cards.size(); i++) {
 			Card tempCard = cards.get(i);
 			if (tempCard.getId() == equalCards.get(0).getId()) {
-				equalCards.set(i, tempCard);
+				equalCards.add(tempCard);
 			}
 		}
 		
@@ -31,12 +31,12 @@ public class BoardTest extends TestCase {
 		Board board1 = new Board("easy");
 		List<Card> cards1 = board1.getCards();
 		// Bucar cartas que sean diferentes
-		List<Card> differentCards = new ArrayList<>();
-		differentCards.set(0, cards1.get(0));
+		List<Card> differentCards = new ArrayList<>(2);
+		differentCards.add(cards1.get(0));
 		for (int i = 0; i < cards1.size(); i++) {
 			Card tempCard = cards1.get(i);
 			if (tempCard.getId() != differentCards.get(0).getId()) {
-				differentCards.set(i, tempCard);
+				differentCards.add(tempCard);
 			}
 		}
 		
@@ -46,41 +46,24 @@ public class BoardTest extends TestCase {
 		assertEquals("La carta 4 esta descubierta", false, differentCards.get(1).getIsDiscovered());
 	}
 	
-//	public void testIsAllCardsUncovered() {
-//		Board board = new Board("easy");
-//		Card[] cards = board.getCards();
-//		
-//		for (Card card : cards) {
-//			card.setIsDiscovered();
-//			board.addUncoveredCard();
-//		}
-//		
-//		// Validar que el metodo si determine que ya todas las cartas esten descubiertas
-//		assertEquals("Las cartas no estan descubiertas", true, board.isAllCardsUncovered());
-//		
-//		Board board1 = new Board("easy");
-//		Card[] cards1 = board1.getCards();
-//		
-//		cards1[0].setIsDiscovered();
-//		
-//		// Validar que el metodo no dedtermine que las cartas estan descubiertas
-//		assertEquals("Las cartas estan descubiertas", false, board1.isAllCardsUncovered());
-//	}
-
-	// Hacerle test a paintBoard
-//	public void testPaintBoard() {
-//		Board boardEasy = new Board("easy");
-//		
-//		String boardStringEasy = boardEasy.paintBoard();
-//		String[] boardSplitEasy = boardStringEasy.split("\\[Blanco\\]");
-//		
-//		assertEquals("El tablero no tiene el tamano esperado", 17, boardSplitEasy.length);
-//		
-//		Board boardHard = new Board("medium");
-//		
-//		String boardStringHard = boardHard.paintBoard();
-//		String[] boardSplitHard = boardStringHard.split("\\[Blanco\\]");
-//		
-//		assertEquals("El tablero no tiene el tamano esperado", 37, boardSplitHard.length);
-//	}
+	public void testIsAllCardsUncovered() {
+		Board board = new Board("easy");
+		List<Card> cards = board.getCards();
+		
+		for (Card card : cards) {
+			card.setIsDiscovered(true);
+			board.addUncoveredCard();
+		}
+		
+		// Validar que el metodo si determine que ya todas las cartas esten descubiertas
+		assertEquals("Las cartas no estan descubiertas", true, board.isAllCardsUncovered());
+		
+		Board board1 = new Board("easy");
+		List<Card> cards1 = board1.getCards();
+		
+		cards1.get(0).setIsDiscovered(true);
+		
+		// Validar que el metodo no dedtermine que las cartas estan descubiertas
+		assertEquals("Las cartas estan descubiertas", false, board1.isAllCardsUncovered());
+	}
 }
